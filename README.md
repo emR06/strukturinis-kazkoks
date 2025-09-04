@@ -1,1 +1,2 @@
 # strukturinis-kazkoks
+hello world
