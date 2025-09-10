@@ -1,3 +1,3 @@
 # strukturinis-kazkoks
 hello world
-balala
+\n balala is this how it works
