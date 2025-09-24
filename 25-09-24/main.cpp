@@ -53,20 +53,20 @@ int main() {
     //cout<<sum;
 
     //6 uzd.
-    //int m;
-    //float p,proc;
-    //cin>>p>>proc>>m;
-    //for(int i=0; i<m; i++) {
-        //p=p*(1+(proc/100));
-    //}
-    //cout<<p<<endl;
+    int m;
+    float p,proc;
+    cin>>p>>proc>>m;
+    for(int i=0; i<m; i++) {
+        p=p*(1+(proc/100));
+    }
+    cout<<p<<endl;
 
     //7 uzd.
-    for(int i=1; i<=20; i++) {
-        if(i%4==0) {
-            cout<<i<<endl;
-        }
-    }
+    //for(int i=1; i<=20; i++) {
+        //if(i%4==0) {
+            //cout<<i<<endl;
+        //}
+    //}
 
     return 0;
 }

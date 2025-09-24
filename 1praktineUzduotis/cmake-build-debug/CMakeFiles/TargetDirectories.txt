@@ -1,0 +1,3 @@
+C:/Users/s063167/Desktop/strukt-prog/1praktineUzduotis/cmake-build-debug/CMakeFiles/1praktineUzduotis.dir
+C:/Users/s063167/Desktop/strukt-prog/1praktineUzduotis/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/s063167/Desktop/strukt-prog/1praktineUzduotis/cmake-build-debug/CMakeFiles/rebuild_cache.dir
