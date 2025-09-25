@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 void pirkti(int pasirink);
 void parduoti(int pasirink);
@@ -21,13 +22,13 @@ int main() {
         case 1: cout<<"valiutos kurso palyginimas su kita valiuta."; palygint(pasirink); break;
         case 2: cout<<"galimybe isigyti valiutos."; pirkti(pasirink); break;
         case 3: cout<<"galimybe parduoti valiuta."; parduoti(pasirink); break;
-        default: cout<<"error"; break;
+        default: cout<<"error"<<endl<<"Prasome bandyti dar karta."; break;
     }
     return 0;
 }
 
 void palygint(int pasirink) {
-    int n;
+    float n;
     float GBP_Bendras=0.8729;
     float USD_Bendras=1.1793;
     float INR_Bendras=104.6918;
@@ -49,9 +50,9 @@ void palygint(int pasirink) {
 
     cout<<endl<<"1 EUR = ";
     switch(pasirink) {
-        case 1: cout<<GBP_Bendras<<" GBP."; break;
-        case 2: cout<<USD_Bendras<<" USD."; break;
-        case 3: cout<<INR_Bendras<<" INR."; break;
+        case 1: cout<<fixed<<setprecision(2)<<GBP_Bendras<<" GBP."; break;
+        case 2: cout<<fixed<<setprecision(2)<<USD_Bendras<<" USD."; break;
+        case 3: cout<<fixed<<setprecision(2)<<INR_Bendras<<" INR."; break;
         default: cout<<"error"; break;
     }
 
@@ -59,15 +60,15 @@ void palygint(int pasirink) {
     cin>>n;
     cout<<endl<<n<<" EUR = ";
     switch(pasirink) {
-        case 1: cout<<GBP_Bendras*n<<" GBP."; break;
-        case 2: cout<<USD_Bendras*n<<" USD."; break;
-        case 3: cout<<INR_Bendras*n<<" INR."; break;
-        default: cout<<"error"; break;
+        case 1: cout<<fixed<<setprecision(2)<<GBP_Bendras*n<<" GBP."; break;
+        case 2: cout<<fixed<<setprecision(2)<<USD_Bendras*n<<" USD."; break;
+        case 3: cout<<fixed<<setprecision(2)<<INR_Bendras*n<<" INR."; break;
+        default: cout<<"error"<<endl<<"Prasome bandyti dar karta."; break;
     }
 }
 
 void pirkti(int pasirink){
-    int n;
+    float n;
     float GBP_Pirkti=0.8600;
     float USD_Pirkti=1.1460;
     float INR_Pirkti=101.3862;
@@ -89,9 +90,9 @@ void pirkti(int pasirink){
 
     cout<<endl<<"Uz 1 EUR galima nupirkti ";
     switch(pasirink) {
-        case 1: cout<<GBP_Pirkti<<" GBP."; break;
-        case 2: cout<<USD_Pirkti<<" USD."; break;
-        case 3: cout<<INR_Pirkti<<" INR."; break;
+        case 1: cout<<fixed<<setprecision(2)<<GBP_Pirkti<<" GBP."; break;
+        case 2: cout<<fixed<<setprecision(2)<<USD_Pirkti<<" USD."; break;
+        case 3: cout<<fixed<<setprecision(2)<<INR_Pirkti<<" INR."; break;
         default: cout<<"error"; break;
     }
 
@@ -99,16 +100,16 @@ void pirkti(int pasirink){
     cin>>n;
     cout<<endl<<"Uz "<<n<<" EUR gausite ";
     switch(pasirink) {
-        case 1: cout<<GBP_Pirkti*n<<" GBP."; break;
-        case 2: cout<<USD_Pirkti*n<<" USD."; break;
-        case 3: cout<<INR_Pirkti*n<<" INR."; break;
-        default: cout<<"error"; break;
+        case 1: cout<<fixed<<setprecision(2)<<GBP_Pirkti*n<<" GBP."; break;
+        case 2: cout<<fixed<<setprecision(2)<<USD_Pirkti*n<<" USD."; break;
+        case 3: cout<<fixed<<setprecision(2)<<INR_Pirkti*n<<" INR."; break;
+        default: cout<<"error"<<endl<<"Prasome bandyti dar karta."; break;
     }
 
 }
 
 void parduoti(int pasirink) {
-    int n;
+    float n;
     float GBP_Parduoti=0.9220;
     float USD_Parduoti=1.2340;
     float INR_Parduoti=107.8546;
@@ -130,9 +131,9 @@ void parduoti(int pasirink) {
 
     cout<<endl<<"Pardavus 1 ";
     switch(pasirink) {
-        case 1: cout<<"GBP gausite "<<GBP_Parduoti<<" EUR."; break;
-        case 2: cout<<"USD gausite "<<USD_Parduoti<<" EUR."; break;
-        case 3: cout<<"INR gausite "<<INR_Parduoti<<" EUR."; break;
+        case 1: cout<<fixed<<setprecision(2)<<"GBP gausite "<<1/GBP_Parduoti<<" EUR."; break;
+        case 2: cout<<fixed<<setprecision(2)<<"USD gausite "<<1/USD_Parduoti<<" EUR."; break;
+        case 3: cout<<fixed<<setprecision(2)<<"INR gausite "<<1/INR_Parduoti<<" EUR."; break;
         default: cout<<"error"; break;
     }
 
@@ -140,9 +141,9 @@ void parduoti(int pasirink) {
     cin>>n;
     cout<<endl<<"Uz "<<n;
     switch(pasirink) {
-        case 1: cout<<" GBP gausite "<<GBP_Parduoti*n<<" EUR."; break;
-        case 2: cout<<" USD gausite "<<USD_Parduoti*n<<" EUR."; break;
-        case 3: cout<<" INR gausite "<<INR_Parduoti*n<<" EUR."; break;
-        default: cout<<"error"; break;
+        case 1: cout<<" GBP gausite "<<fixed<<setprecision(2)<<(1/GBP_Parduoti)*n<<" EUR."; break;
+        case 2: cout<<" USD gausite "<<fixed<<setprecision(2)<<(1/USD_Parduoti)*n<<" EUR."; break;
+        case 3: cout<<" INR gausite "<<fixed<<setprecision(2)<<(1/INR_Parduoti)*n<<" EUR."; break;
+        default: cout<<"error"<<endl<<"Prasome bandyti dar karta."; break;
     }
 }
