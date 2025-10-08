@@ -1,0 +1,3 @@
+C:/Users/s063167/Desktop/strukt-prog/25-09-18/cmake-build-debug/CMakeFiles/25_09_18.dir
+C:/Users/s063167/Desktop/strukt-prog/25-09-18/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/s063167/Desktop/strukt-prog/25-09-18/cmake-build-debug/CMakeFiles/rebuild_cache.dir
