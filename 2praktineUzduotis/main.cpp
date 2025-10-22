@@ -1,14 +1,22 @@
-#include <iostream> //im pretty sure i need an extra library to use strings lol?
-void ivedimas(int MokPaz[][], string Vardai[], int mk, int maxPz);
-void perziura(int MokPaz[][], string Vardai[], bool konkret, int mk,int maxPz);
-void atnaujint(int MokPaz[][], string Vardai[], int mk, int maxPz);
-void pasalinti(int MokPaz[][], string Vardai[], int mk, int maxPz);
-
+#include <iostream>
+#include <string>
 using namespace std;
+
+void ivedimas(int MokPaz[][10], string Vardai[], int &mk, int &maxPz);
+void perziura(int MokPaz[][10], string Vardai[], bool konkret, int &mk,int &maxPz);
+void atnaujint(int MokPaz[][10], string Vardai[], int &mk, int &maxPz);
+void pasalinti(int MokPaz[][10], string Vardai[], int &mk, int &maxPz);
 
 int main() {
     string Vardai[100];
     int MokPaz[100][10]={0}, pas;
+
+    for(int i=0; i<10; i++){
+        for(int j=0; j<100; j++){
+            MokPaz[j][i]=i+1;
+        }
+    }
+
     int mk=0, maxPz=0;
     bool konkret;
     char p;
@@ -19,13 +27,22 @@ int main() {
         cout<<"2) Mokiniu ir ju pazymiu perziura,"<<endl;
         cout<<"3) Pazymiu atnaujinimas,"<<endl;
         cout<<"4) Mokiniu pasalinimas is sistemos."<<endl;
-        cout<<"5) Uzbaigti."
+        cout<<"5) Uzbaigti."<<endl;
+        cout<<endl;
         cin>>pas;
 
         cout<<"Jus pasirinkote: ";
         switch(pas) {
             case 1: cout<<"mokiniu ir ju pazymiu ivedima."<<endl<<"////////////"<<endl; ivedimas(MokPaz,Vardai,mk,maxPz); break;
-            case 2: cout<<"mokiniu ir ju pazymiu perziura."<<endl; cout<<"Ar norite perziureti visa sarasa? y/n"<<endl; if(p=='y'){konkret=false;} else if(p=='n'){konkret=true;} else{cout<<"ka ble"<<endl;} perziura(MokPaz,Vardai,konkret,mk,maxPz); break;
+            case 2: {
+                    cout<<"mokiniu ir ju pazymiu perziura."<<endl;
+                    cout<<"Ar norite perziureti visa sarasa? y/n"<<endl;
+                    cin>>p;
+                    if(p=='y'){konkret=false;}
+                    else if(p=='n'){konkret=true;}
+                    else{cout<<"error"<<endl; break;}
+                    perziura(MokPaz,Vardai,konkret,mk,maxPz); break;
+                    }
             case 3: cout<<"pazymiu atnaujinima."<<endl<<"////////////"<<endl; atnaujint(MokPaz,Vardai,mk,maxPz); break;
             case 4: cout<<"mokiniu pasalinima."<<endl<<"////////////"<<endl; pasalinti(MokPaz,Vardai,mk,maxPz); break;
             case 5: cout<<"uzbaigima. Viso gero."<<endl<<"////////////"<<endl; break;
@@ -35,7 +52,7 @@ int main() {
     return 0;
 }
 
-void ivedimas(int MokPaz[][], string Vardai[], int mk, int maxPz) {
+void ivedimas(int MokPaz[][10], string Vardai[], int &mk, int &maxPz) {
     int n,m;
     cout<<"Prasome ivesti mokiniu kieki: ";
     cin>>n;
@@ -43,64 +60,72 @@ void ivedimas(int MokPaz[][], string Vardai[], int mk, int maxPz) {
         cout<<"Per didelis skaicius. Prasome ivesti skaiciu ne didesni uz "<<100-mk<<"."<<endl;
         cin>>n;
     }
-    for(int i=mk; i<mk+n; i++) {
-        cout<<"Irasykite mokinio varda: ";
-        cin>>Vardai[i];
-        cout<<"Kiek mokinys pazymiu turi? ";
-        cin>>m;
-        while(m>10) {
-            cout<<"Per didelis skaicius. Prasome ivesti skaiciu ne didesni uz 10."<<endl;
-            cin>>m;
-        }
-        if(m>maxPz){maxPz=m;}
-        cout<<"Prasome irasyti pazymius."<<endl;
-        for(int j=0; j<m; j++) {
-            cout<<j+1<<"-as pazymys: ";
-            cin>>MokPaz[i][j];
-        }
-        cout<<"------------"<<endl;
+
+    if(n==0){
+        cout<<"Operacija atsaukta."<<endl;
     }
+    else{
+        for(int i=mk; i<mk+n; i++) {
+            cout<<"Irasykite mokinio varda: ";
+            cin>>Vardai[i];
+            cout<<"Kiek mokinys pazymiu turi? ";
+            cin>>m;
+            while(m>10) {
+                cout<<"Per didelis skaicius. Prasome ivesti skaiciu ne didesni uz 10."<<endl;
+                cin>>m;
+            }
+            if(m>maxPz){maxPz=m;}
+            cout<<"Prasome irasyti pazymius."<<endl;
+            for(int j=0; j<m; j++) {
+                cout<<j+1<<"-as pazymys: ";
+                cin>>MokPaz[i][j];
+            }
+            cout<<"------------"<<endl;
+        }
+        mk+=n;
+    }
+    cout<<"Operacija baigta."<<endl;
+    cout<<"------------"<<endl;
 }
 
-void perziura(int MokPaz[][], string Vardai[], bool konkret, int mk,int maxPz) {
+void perziura(int MokPaz[][10], string Vardai[], bool konkret, int &mk,int &maxPz) {
     int n;
     string vardas;
-    switch(konkret) {
-        case true: {
-            cout<<"Prasome irasyti mokinio varda."
+    if(konkret==true){
+            cout<<"Prasome irasyti mokinio varda.";
             cin>>vardas;
             for(int i=0; i<n; i++) {
                 if(vardas==Vardai[i]){n=i;}
             }
-            cout<<"Spausdinima mokinio pazymiai."<<endl;
-            cout<<vardas<<": ";
-            for(int i=1; i<maxPz; i++) {
-                cout<<MokPaz[n][i];
+            cout<<"Mokinio pazymiai."<<endl;
+            cout<<vardas<<":";
+            for(int i=0; i<maxPz; i++) {
+                cout<<" "<<MokPaz[n][i];
             }
-            out<<"------------"<<endl;
-            break;
+            cout<<endl<<"------------"<<endl;
+
         }
-        case false: {
+    else{
             cout<<"Spausdinimas visas sarasas mokiniu ir ju pazymiai."<<endl;
             for(int i=0; i<mk; i++) {
-                cout<<Vardai[i]<<": ";
+                cout<<Vardai[i]<<":";
                 for(int j=0; j<maxPz; j++) {
-                    cout<<MokPaz[i][j]<<" ";
+                    cout<<" "<<MokPaz[i][j];
                 }
                 cout<<endl;
             }
             cout<<"------------"<<endl;
-            break;
-        }
     }
+    cout<<"Operacija baigta."<<endl;
+    cout<<"------------"<<endl;
 }
 
-void atnaujint(int MokPaz[][], string Vardai[], int mk, int maxPz) {
+void atnaujint(int MokPaz[][10], string Vardai[], int &mk, int &maxPz) {
     string vardas;
     int n,x;
     cout<<"Mokiniu sarasas: "<<endl;
     for(int i=0; i<mk; i++) {
-        cout<<" "<<Vardai[i]<<endl;
+        cout<<" o "<<Vardai[i]<<endl;
     }
     cout<<endl<<"Prasome irasyti mokinio varda, kurio pazymius norite koreguoti. ";
     cin>>vardas;
@@ -108,6 +133,8 @@ void atnaujint(int MokPaz[][], string Vardai[], int mk, int maxPz) {
     for(int i=0; i<mk; i++) {
         if(vardas==Vardai[i]){n=i;}
     }
+
+    cout<<"Mokinio "<<vardas<<" pazymiai."<<endl;
     cout<<vardas<<": ";
     for(int i=0; i<maxPz; i++) {
         cout<<MokPaz[n][i]<<" ";
@@ -115,23 +142,25 @@ void atnaujint(int MokPaz[][], string Vardai[], int mk, int maxPz) {
     cout<<"Kelinta pazymi norite redaguoti? ";
     cin>>x;
     cout<<"Irasykite nauja pazymi. ";
-    cin>>MokPaz[n][x];
+    cin>>MokPaz[n][x-1];
     cout<<endl;
 
-    cout<<"Nauji pazymiai:"<<endl;
+    cout<<"Nauji mokinio "<<vardas<<" pazymiai."<<endl;
     cout<<vardas<<": ";
     for(int i=0; i<maxPz; i++) {
         cout<<MokPaz[n][i]<<" ";
     }
+    cout<<endl<<"------------"<<endl;
+    cout<<"Operacija baigta."<<endl;
     cout<<"------------"<<endl;
 }
 
-void pasalinti(int MokPaz[][], string Vardai[], int mk, int maxPz) {
+void pasalinti(int MokPaz[][10], string Vardai[], int &mk, int &maxPz) {
     string vardas;
     int n;
     cout<<"Mokiniu sarasas: "<<endl;
     for(int i=0; i<mk; i++) {
-        cout<<" "<<Vardai[i]<<endl;
+        cout<<" o "<<Vardai[i]<<endl;
     }
     cout<<endl<<"Prasome irasyti mokinio varda, kuri norite pasalinti is saraso. ";
     cin>>vardas;
@@ -154,17 +183,16 @@ void pasalinti(int MokPaz[][], string Vardai[], int mk, int maxPz) {
         }
     }
     Vardai[mk]="";
-    //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     for(int i=0; i<maxPz; i++) {
-        MokPaz[mk][i]=0; //FIND A WAY NOT TO USE A LOOP HERE
+        MokPaz[mk][i]=0;
     }
-    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     mk--;
-    //FIND A WAY TO CHANGE MAXPZ TOO
 
     cout<<"Atnaujintas sarasas: "<<endl;
     for(int i=0; i<mk; i++) {
-        cout<<" "<<Vardai[i]<<endl;
+        cout<<" o "<<Vardai[i]<<endl;
     }
+    cout<<"------------"<<endl;
+    cout<<"Operacija baigta."<<endl;
     cout<<"------------"<<endl;
 }
