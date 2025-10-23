@@ -2,14 +2,17 @@
 #include <string>
 using namespace std;
 
-void ivedimas(int MokPaz[][10], string Vardai[], int &mk, int &maxPz);
+void ivedimas(int pazLim, int mokLim, int MokPaz[][10], string Vardai[], int &mk, int &maxPz);
 void perziura(int MokPaz[][10], string Vardai[], bool konkret, int &mk,int &maxPz);
 void atnaujint(int MokPaz[][10], string Vardai[], int &mk, int &maxPz);
 void pasalinti(int MokPaz[][10], string Vardai[], int &mk, int &maxPz);
 
 int main() {
-    string Vardai[100];
-    int MokPaz[100][10]={0}, pas;
+    const int mokLim=100;
+    const int pazLim=10;
+
+    string Vardai[mokLim];
+    int MokPaz[mokLim][pazLim]={0}, pas;
     int mk=0, maxPz=0;
     bool konkret;
     char p;
@@ -26,7 +29,7 @@ int main() {
 
         cout<<"Jus pasirinkote: ";
         switch(pas) {
-            case 1: cout<<"mokiniu ir ju pazymiu ivedima."<<endl<<"==========================="<<endl<<endl; ivedimas(MokPaz,Vardai,mk,maxPz); break;
+            case 1: cout<<"mokiniu ir ju pazymiu ivedima."<<endl<<"==========================="<<endl<<endl; ivedimas(pazLim,mokLim,MokPaz,Vardai,mk,maxPz); break;
             case 2: {
                     cout<<"mokiniu ir ju pazymiu perziura."<<endl;
                     cout<<"Ar norite perziureti visa sarasa? y/n"<<endl;
@@ -47,12 +50,12 @@ int main() {
     return 0;
 }
 
-void ivedimas(int MokPaz[][10], string Vardai[], int &mk, int &maxPz) {
+void ivedimas(int pazLim, int mokLim, int MokPaz[][10], string Vardai[], int &mk, int &maxPz) {
     int n,m;
     cout<<"Prasome ivesti mokiniu kieki: ";
     cin>>n;
-    while(mk+n>100) {
-        cout<<"Per didelis skaicius. Prasome ivesti skaiciu ne didesni uz "<<100-mk<<"."<<endl;
+    while(mk+n>mokLim) {
+        cout<<"Per didelis skaicius. Prasome ivesti skaiciu ne didesni uz "<<mokLim-mk<<"."<<endl;
         cin>>n;
     }
 
@@ -65,8 +68,8 @@ void ivedimas(int MokPaz[][10], string Vardai[], int &mk, int &maxPz) {
             cin>>Vardai[i];
             cout<<"Kiek mokinys pazymiu turi? ";
             cin>>m;
-            while(m>10) {
-                cout<<"Per didelis skaicius. Prasome ivesti skaiciu ne didesni uz 10."<<endl;
+            while(m>pazLim) {
+                cout<<"Per didelis skaicius. Prasome ivesti skaiciu ne didesni uz "<<pazLim<<"."<<endl;
                 cout<<"Kiek mokinys pazymiu turi? ";
                 cin>>m;
             }
