@@ -10,13 +10,6 @@ void pasalinti(int MokPaz[][10], string Vardai[], int &mk, int &maxPz);
 int main() {
     string Vardai[100];
     int MokPaz[100][10]={0}, pas;
-
-    for(int i=0; i<10; i++){
-        for(int j=0; j<100; j++){
-            MokPaz[j][i]=i+1;
-        }
-    }
-
     int mk=0, maxPz=0;
     bool konkret;
     char p;
@@ -33,20 +26,22 @@ int main() {
 
         cout<<"Jus pasirinkote: ";
         switch(pas) {
-            case 1: cout<<"mokiniu ir ju pazymiu ivedima."<<endl<<"////////////"<<endl; ivedimas(MokPaz,Vardai,mk,maxPz); break;
+            case 1: cout<<"mokiniu ir ju pazymiu ivedima."<<endl<<"==========================="<<endl<<endl; ivedimas(MokPaz,Vardai,mk,maxPz); break;
             case 2: {
                     cout<<"mokiniu ir ju pazymiu perziura."<<endl;
                     cout<<"Ar norite perziureti visa sarasa? y/n"<<endl;
                     cin>>p;
                     if(p=='y'){konkret=false;}
                     else if(p=='n'){konkret=true;}
-                    else{cout<<"error"<<endl; break;}
-                    perziura(MokPaz,Vardai,konkret,mk,maxPz); break;
+                    else{cout<<"Prasome ivesti y/n."<<endl; break;}
+                    cout<<"==========================="<<endl<<endl;
+                    perziura(MokPaz,Vardai,konkret,mk,maxPz);
+                    break;
                     }
-            case 3: cout<<"pazymiu atnaujinima."<<endl<<"////////////"<<endl; atnaujint(MokPaz,Vardai,mk,maxPz); break;
-            case 4: cout<<"mokiniu pasalinima."<<endl<<"////////////"<<endl; pasalinti(MokPaz,Vardai,mk,maxPz); break;
-            case 5: cout<<"uzbaigima. Viso gero."<<endl<<"////////////"<<endl; break;
-            default: cout<<"Tokios operacijos nera. Prasome bandyti dar karta."; break;
+            case 3: cout<<"pazymiu atnaujinima."<<endl<<"==========================="<<endl<<endl; atnaujint(MokPaz,Vardai,mk,maxPz); break;
+            case 4: cout<<"mokiniu pasalinima."<<endl<<"==========================="<<endl<<endl; pasalinti(MokPaz,Vardai,mk,maxPz); break;
+            case 5: cout<<"uzbaigima. Viso gero."<<endl<<"==========================="<<endl<<endl; break;
+            default: cout<<"Tokios operacijos nera. Prasome bandyti dar karta."<<endl<<endl; break;
         }
     }
     return 0;
@@ -72,6 +67,7 @@ void ivedimas(int MokPaz[][10], string Vardai[], int &mk, int &maxPz) {
             cin>>m;
             while(m>10) {
                 cout<<"Per didelis skaicius. Prasome ivesti skaiciu ne didesni uz 10."<<endl;
+                cout<<"Kiek mokinys pazymiu turi? ";
                 cin>>m;
             }
             if(m>maxPz){maxPz=m;}
@@ -79,30 +75,35 @@ void ivedimas(int MokPaz[][10], string Vardai[], int &mk, int &maxPz) {
             for(int j=0; j<m; j++) {
                 cout<<j+1<<"-as pazymys: ";
                 cin>>MokPaz[i][j];
+                while(MokPaz[i][j]>10){
+                    cout<<"Per didelis skaicius. Prasome ivesti skaiciu ne didesni uz 10."<<endl;
+                    cout<<j+1<<"-as pazymys: ";
+                    cin>>MokPaz[i][j];
+                }
             }
-            cout<<"------------"<<endl;
+            cout<<"---------------------------"<<endl;
         }
         mk+=n;
     }
-    cout<<"Operacija baigta."<<endl;
-    cout<<"------------"<<endl;
+    cout<<"Operacija baigta."<<endl<<endl;
+    cout<<"==========================="<<endl;
 }
 
 void perziura(int MokPaz[][10], string Vardai[], bool konkret, int &mk,int &maxPz) {
     int n;
     string vardas;
     if(konkret==true){
-            cout<<"Prasome irasyti mokinio varda.";
+            cout<<"Prasome irasyti mokinio varda. ";
             cin>>vardas;
             for(int i=0; i<n; i++) {
                 if(vardas==Vardai[i]){n=i;}
             }
-            cout<<"Mokinio pazymiai."<<endl;
+            cout<<"Mokinio pazymiai. "<<endl;
             cout<<vardas<<":";
             for(int i=0; i<maxPz; i++) {
                 cout<<" "<<MokPaz[n][i];
             }
-            cout<<endl<<"------------"<<endl;
+            cout<<endl<<"---------------------------"<<endl;
 
         }
     else{
@@ -114,10 +115,10 @@ void perziura(int MokPaz[][10], string Vardai[], bool konkret, int &mk,int &maxP
                 }
                 cout<<endl;
             }
-            cout<<"------------"<<endl;
+            cout<<"---------------------------"<<endl;
     }
-    cout<<"Operacija baigta."<<endl;
-    cout<<"------------"<<endl;
+    cout<<"Operacija baigta."<<endl<<endl;
+    cout<<"==========================="<<endl;
 }
 
 void atnaujint(int MokPaz[][10], string Vardai[], int &mk, int &maxPz) {
@@ -139,7 +140,7 @@ void atnaujint(int MokPaz[][10], string Vardai[], int &mk, int &maxPz) {
     for(int i=0; i<maxPz; i++) {
         cout<<MokPaz[n][i]<<" ";
     }
-    cout<<"Kelinta pazymi norite redaguoti? ";
+    cout<<endl<<"Kelinta pazymi norite redaguoti? ";
     cin>>x;
     cout<<"Irasykite nauja pazymi. ";
     cin>>MokPaz[n][x-1];
@@ -150,9 +151,9 @@ void atnaujint(int MokPaz[][10], string Vardai[], int &mk, int &maxPz) {
     for(int i=0; i<maxPz; i++) {
         cout<<MokPaz[n][i]<<" ";
     }
-    cout<<endl<<"------------"<<endl;
-    cout<<"Operacija baigta."<<endl;
-    cout<<"------------"<<endl;
+    cout<<endl<<"---------------------------"<<endl;
+    cout<<"Operacija baigta."<<endl<<endl;
+    cout<<"==========================="<<endl;
 }
 
 void pasalinti(int MokPaz[][10], string Vardai[], int &mk, int &maxPz) {
@@ -192,7 +193,7 @@ void pasalinti(int MokPaz[][10], string Vardai[], int &mk, int &maxPz) {
     for(int i=0; i<mk; i++) {
         cout<<" o "<<Vardai[i]<<endl;
     }
-    cout<<"------------"<<endl;
-    cout<<"Operacija baigta."<<endl;
-    cout<<"------------"<<endl;
+    cout<<"---------------------------"<<endl;
+    cout<<"Operacija baigta."<<endl<<endl;
+    cout<<"==========================="<<endl;
 }
