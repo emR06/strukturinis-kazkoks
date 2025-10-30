@@ -1,2 +1,2 @@
-Parduoti bilietai: 88250
-Pardavimu suma: 6493750.00
+Bilietu kiekis: 88250
+Bendra pardavimu suma: 6493750.00

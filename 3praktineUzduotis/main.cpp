@@ -15,18 +15,18 @@ int main ()
         cout<<"1) Bilietu pardavimu sumos skaiciavimas"<<endl;
         cout<<"2) Darbuotoju atlyginimu atnaujinimas"<<endl;
         cout<<"3) Uzbaigti"<<endl;
-        cout<<endl;
+        cout<<"-------"<<endl;
         cin>>p;
         switch (p){
             case 1:{
-                cout<<"Pasirinkote sumos skaiciavima."<<endl;
-                cout<<"---------------------------------------"<<endl;
+                cout<<"Pasirinkote bilietu skaiciavima."<<endl;
+                cout<<"======================================="<<endl;
                 bil_suma(m);
                break;
             }
             case 2:{
                 cout<<"Pasirinkote atlyginimu atnaujinima."<<endl;
-                cout<<"---------------------------------------"<<endl;
+                cout<<"======================================="<<endl;
                 atlyg_padid(m);
                 break;
             }
@@ -62,7 +62,7 @@ void bil_suma(const int m)
     for(int i=0; i<n; i++){
         cout<<Bil[i][0]<<" "<<Bil[i][1]<<endl;
     }
-    cout<<"~~~~~~~~~~~~~~"<<endl;
+    cout<<"-------"<<endl;
 
     for(int i=0; i<n; i++){
         kiek+=Bil[i][1];
@@ -78,7 +78,7 @@ void bil_suma(const int m)
 
     cout<<endl<<"Rezultatai isspausdinti i faila."<<endl;
     cout<<"Operacija baigta."<<endl;
-    cout<<"---------------------------------------"<<endl<<endl;
+    cout<<"======================================="<<endl<<endl;
 }
 
 void atlyg_padid(const int m)
@@ -121,5 +121,5 @@ void atlyg_padid(const int m)
 
     cout<<endl<<"Rezultatai isspausdinti i faila."<<endl;
     cout<<"Operacija baigta."<<endl;
-    cout<<"---------------------------------------"<<endl<<endl;
+    cout<<"======================================="<<endl<<endl;
 }
