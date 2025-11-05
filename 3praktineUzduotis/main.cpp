@@ -48,7 +48,7 @@ void bil_suma(const int m)
     //sveiki atvyke i bilietu apdorojimo funkcija
     int Bil[m][2]; //masyvas skirtas bilietu informacijai issaugot (bilietu kiekis, bilieto kaina)
     int n=0; //eiluciu sk
-    int kiek=0 //savaime suprantoma
+    int kiek=0; //savaime suprantoma
     float sum=0;
 
     ifstream fd("prices.txt"); //bam!!!! failas atidarytas
@@ -103,21 +103,16 @@ void atlyg_padid(const int m)
     cout<<"Visa lentele:"<<endl;
     for(int i=0; i<n; i++)
     {
-        cout<<fullN[i][0]<<" "<<fullN[i][1]<<" "<<duom[i][0]<<" "<<duom[i][1]<<endl;        //
-    }                                                                                       //
-    cout<<endl;                                                                             //
-    cout<<"Su atnaujintais atlyginimais: "<<endl;                                           //
-    for(int i=0; i<n; i++)                                                                  // kad vartotojas matytu, ka ivede,
-    {                                                                                       // ka gaus
-        naujAtl=duom[i][0]+(duom[i][0]*(duom[i][1]/100));                                   //
-        cout<<fullN[i][0]<<" "<<fullN[i][1]<<" "<<fixed<<setprecision(2)<<naujAtl<<endl;    //
-    }                                                                                       //
-
-    ofstream fr("newSalary.txt"); //rezultatai italpinami i rezultatu faila
-    for(int i=0; i<n; i++)
-    {
-        naujAtl=duom[i][0]+(duom[i][0]*(duom[i][1]/100));
-        fr<<fullN[i][0]<<" "<<fullN[i][1]<<" "<<fixed<<setprecision(2)<<naujAtl<<endl;
+        cout<<fullN[i][0]<<" "<<fullN[i][1]<<" "<<duom[i][0]<<" "<<duom[i][1]<<endl;          //
+    }                                                                                           //
+    cout<<endl;                                                                                  //
+    cout<<"Su atnaujintais atlyginimais: "<<endl;                                                //
+    ofstream fr("newSalary.txt");                                                                //
+    for(int i=0; i<n; i++)                                                                       // kad vartotojas matytu, ka ivede,
+    {                                                                                            // ka gaus
+        naujAtl=duom[i][0]+(duom[i][0]*(duom[i][1]/100));                                       //
+        cout<<fullN[i][0]<<" "<<fullN[i][1]<<" "<<fixed<<setprecision(2)<<naujAtl<<endl;      //
+        fr<<fullN[i][0]<<" "<<fullN[i][1]<<" "<<fixed<<setprecision(2)<<naujAtl<<endl; //rezultatai tuo pat italpinami i faila
     }
     fr.close();
 
