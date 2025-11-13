@@ -42,4 +42,6 @@ void counting (char c, int& lc, int& sc, int& wc)
               //count the numbers as a word too but then again. numbers are technically words
               //whatever im too lazy to go through this philosophical dillemma
     }         //and my method is too simple i think
+
+              //im from the future and i think you're overthinkikng it. bloody minging innit
 }
