@@ -17,6 +17,10 @@ struct selectedMenuItem{
 
 void getData(menuItemType menuList[],int& n);
 void showMenu(menuItemType menuList[],int n);
+void ordering(menuItemType menuList[],selectedMenuItem orderList[],int n,int& x);
+void printCheck(selectedMenuItem orderList[],int x);
+void copyCheck(selectedMenuItem orderList[],int& x);
+void cleanOrder(selectedMenuItem orderList[],int& x,int m);
 
 int main ()
 {
@@ -27,6 +31,9 @@ int main ()
 
     getData(menuList,n);
     showMenu(menuList,n);
+    ordering(menuList,orderList,n,x);
+    copyCheck(orderList,x);
+    printCheck(orderList,x);
 return 0;
 }
 
@@ -75,17 +82,72 @@ void ordering(menuItemType menuList[],selectedMenuItem orderList[],int n,int& x)
     cout<<"Norint uzsisakyti, prasome irasyti saraso numeri. Baigus uzsisakyti, irasykite 0."<<endl;
     cin>>order;
     while(order!=0){
+        if(order>n)
+        {
+            while(order>n)
+            {
+                cout<<"Patiekalas nerastas. Prasome bandyti dar karta. ";
+                cin>>order;
+            }
+        }
         orderList[x].menuItem=menuList[order-1].menuItem;
-        cout<<"Prasome irasyti kieki."
-        cin>>orderList[x].amnt; //gotta find a way to check if theres duplicate orders and combine them after...
-        orderList[x].price=menuList[order-1].menuPrice*orderList[x].amnt;
+
+        cout<<"Prasome irasyti kieki. ";
+        cin>>orderList[x].amnt;
+        if(orderList[x].amnt==0)
+        {
+            cout<<"Kiekis negali buti 0. Prasome irasyti kita kieki. ";
+            cin>>orderList[x].amnt;
+        }
+        orderList[x].price=menuList[order-1].menuPrice;
         x++;
+        cout<<"Uzsakymas apdorotas."<<endl<<endl<<"Prasome irasyti saraso numeri. Baigus uzsisakyti, irasykite 0. ";
         cin>>order;
     }
-    cout<<endl<<"Aciu. Jusu uzsakymas apdorotas. Rasite isspausdina saskaita kataloge.";
+    cout<<endl<<"Aciu. Jusu uzsakymas apdorotas. Rasite isspausdinta saskaita kataloge.";
 }
 
-void printCheck()
+void copyCheck(selectedMenuItem orderList[],int& x)
 {
+    for(int i=0; i<x-1; i++)
+    {
+        for(int j=i+1; j<x; j++)
+        {
+            if(orderList[i].menuItem==orderList[j].menuItem)
+            {
+                orderList[i].amnt+=orderList[j].amnt;
+                cleanOrder(orderList,x,j);
+                j--;
+            }
+        }
+    }
+}
 
+void cleanOrder(selectedMenuItem orderList[],int& x,int m)
+{
+    for(int i=m; i<x-1; i++)
+    {
+        orderList[i].menuItem=orderList[i+1].menuItem;
+        orderList[i].amnt=orderList[i+1].amnt;
+        orderList[i].price=orderList[i+1].price;
+    }
+    orderList[x].menuItem="";
+    orderList[x].amnt=0;
+    orderList[x].price=0;
+    x--;
+}
+
+void printCheck(selectedMenuItem orderList[],int x)
+{
+    double galSum=0,mok;
+    ofstream fr("receipt.txt");
+    fr<<"Sveiki atvykę į restoraną ''restoranas''"<<endl<<endl;
+    for(int i=0; i<x; i++)
+    {
+        fr<<left<<setw(4)<<orderList[i].amnt<<setw(40)<<orderList[i].menuItem<<orderList[i].price<<endl;
+        galSum+=orderList[i].amnt*orderList[i].price;
+    }
+    mok=galSum*0.21;
+    fr<<endl<<setw(45)<<"Mokesčiai (21%)"<<fixed<<setprecision(2)<<mok<<endl;
+    fr<<setw(45)<<"Galutinė suma"<<fixed<<setprecision(2)<<mok+galSum;
 }
