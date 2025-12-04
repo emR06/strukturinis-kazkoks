@@ -1,5 +1,8 @@
 Sveiki atvykę į restoraną ''restoranas''
 
+1   Kiausiniene                             1.45
+2   Kiaulienos sonine su keptu kiausiniu    2.45
+3   Keksiukas su vysnia                     0.99
 
-                             Mokesčiai (21%)0.00
-                               Galutinė suma0.00
+Mokesčiai (21%)                             1.96
+Galutinė suma                               11.28

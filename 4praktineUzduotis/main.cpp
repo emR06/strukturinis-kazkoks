@@ -106,7 +106,8 @@ void ordering(menuItemType menuList[],selectedMenuItem orderList[],int n,int& x)
         cout<<"Uzsakymas apdorotas."<<endl<<endl<<"Prasome irasyti saraso numeri. Baigus uzsisakyti, irasykite 0. ";
         cin>>order; //ir vel kartojame cikla..!!
     }
-    cout<<endl<<"Aciu. Jusu uzsakymas apdorotas. Rasite isspausdinta saskaita kataloge.";
+    cout<<endl<<"Aciu. Jusu uzsakymas apdorotas.";
+    cout<<endl<<"---------------------------------------";
 }
 
 void copyCheck(selectedMenuItem orderList[],int& x) //si funkcija skirta tam, kad "sutrauktu" duplikatus
@@ -144,13 +145,17 @@ void printCheck(selectedMenuItem orderList[],int x) //funkcija skirta spausdinim
     double galSum=0,mok; //galSum - galutine suma visu patiekalu, mok - apskaiciuota PVM dalis
     ofstream fr("receipt.txt"); //atidarome faila
     fr<<"Sveiki atvykę į restoraną ''restoranas''"<<endl<<endl;
+    cout<<endl<<endl<<"Sveiki atvyke i restorana ''restoranas''"<<endl<<endl;
     for(int i=0; i<x; i++)
     {
-        fr<<left<<setw(4)<<orderList[i].amnt<<setw(40)<<orderList[i].menuItem<<orderList[i].price<<endl; //spausdiname kieki,
+        fr<<left<<setw(4)<<orderList[i].amnt<<setw(40)<<fixed<<setprecision(2)<<orderList[i].menuItem<<orderList[i].price<<endl; //spausdiname kieki,
+        cout<<left<<setw(4)<<orderList[i].amnt<<setw(40)<<fixed<<setprecision(2)<<orderList[i].menuItem<<orderList[i].price<<endl;
         galSum+=orderList[i].amnt*orderList[i].price;                                                    //patiekala, vieneto kaina ir apskaiciuojame
     }                                                                                                    //suma
     mok=galSum*0.21; //apskaiciuojame mokescio dali
     fr<<endl<<setw(45)<<"Mokesčiai (21%)"<<fixed<<setprecision(2)<<mok<<endl; //isspausdiname PVM,
     fr<<setw(45)<<"Galutinė suma"<<fixed<<setprecision(2)<<mok+galSum;        //ir galutine suma
+    cout<<endl<<setw(44)<<"Mokesciai (21%)"<<fixed<<setprecision(2)<<mok<<endl;
+    cout<<setw(44)<<"Galutine suma"<<fixed<<setprecision(2)<<mok+galSum<<endl;
     fr.close(); //uzdarome faila
 }
