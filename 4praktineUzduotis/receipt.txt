@@ -1,7 +1,5 @@
 Sveiki atvykę į restoraną ''restoranas''
 
-1   Arbata                                  0.75
-1   Kiausiniene                             1.45
 
-Mokesčiai (21%)                             0.46
-Galutinė suma                               2.66
+                             Mokesčiai (21%)0.00
+                               Galutinė suma0.00
