@@ -30,6 +30,8 @@ float vidurkSc(vector<Student> students);
 float vidurkPr(vector<Student> students);
 int counting(vector<Student> students,int num);
 void statsKl(vector<Student> students,char* Ats);
+void sunkKl(Question qStats[],int n,int pos[],int &x);
+void paieska(vector<Student> students);
 
 
 
@@ -78,6 +80,9 @@ int main ()
             }
         case 4:
             {
+                cout<<"Paieska."<<endl;
+                paieska(students);
+                cout<<endl<<"Baigta."<<endl<<endl;
                 break;
             }
         case 5:
@@ -234,6 +239,8 @@ int counting(vector<Student> students,int num)
 void statsKl(vector<Student> students,char* Ats)
 {
     Question qStats[20];
+    int pos[20];
+    int x=0;
     for(int i=0; i<students.size(); i++)
     {
         for(int j=0; j<20; j++)
@@ -250,5 +257,66 @@ void statsKl(vector<Student> students,char* Ats)
         cout<<"Teisingi: "<<qStats[i-1].right<<" | Neteisingi: "<<qStats[i-1].wrong<<" | Neatsakyti: "<<qStats[i-1].und<<endl;
         cout<<"."<<endl;
     }
+    cout<<"Sunkiausi klausimai: "<<endl;
+    sunkKl(qStats,students.size(),pos,x);
+    for(int i=0; i<x; i++)
+    {
+        cout<<"  o "<<pos[i]-1<<"-tas klausimas."<<endl;
+    }
 }
 
+void sunkKl(Question qStats[],int n,int pos[],int &x)
+{
+    float sunk=120;
+    for(int i=0; i<20; i++)
+    {
+        qStats[i].percent = (qStats[i].right/(n*1.0))*100;
+        if(qStats[i].percent<sunk)
+        {
+            sunk=qStats[i].percent;
+        }
+    }
+
+    for(int i=0; i<20; i++)
+    {
+        if(qStats[i].percent == sunk)
+        {
+            pos[x] = i;
+            x++;
+        }
+    }
+}
+
+void paieska(vector<Student> students)
+{
+    string sid;
+    bool searched;
+    cout<<"Studentu ID sarasas:"<<endl;
+    for(int i=0; i<students.size(); i++)
+    {
+        cout<<"  o "<<students[i].id<<endl;
+    }
+    cout<<"===================================="<<endl;
+    while(sid!="0"){
+    searched=false;
+    cout<<"Norint iseiti, prasome irasyti 0."<<endl;
+    cout<<"Irasykite studento ID: ";
+    cin>>sid;
+    if(sid=="0"){break;}
+    for(int i=0; i<students.size(); i++)
+    {
+        if(students[i].id == sid)
+        {
+            cout<<"~~~~~"<<endl;
+            cout<<students[i].id<<": "<<endl;
+            cout<<"Balai: "<<students[i].score<<" | Procentai: "<<students[i].percent<<" | Pazymys: "<<students[i].grade<<endl;
+            cout<<"~~~~~"<<endl;
+            searched=true;
+        }
+    }
+    if(searched==false)
+    {
+        cout<<"Tokio ID nera. Prasome bandyti dar karta."<<endl<<endl;
+    }
+    }
+}
