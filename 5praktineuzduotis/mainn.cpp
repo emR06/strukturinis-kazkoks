@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-struct Student{
+struct Student{ //studentu struktura
     string id;
     char answer[20];
     int grade;
@@ -13,7 +13,7 @@ struct Student{
     float percent;
 };
 
-struct Question{
+struct Question{ //klausimu struktura (statistikai)
     int right=0;
     int wrong=0;
     int und=0;
@@ -96,9 +96,9 @@ int main ()
 return 0;
 }
 
-void sk(vector<Student> &students, char* Ats)
+void sk(vector<Student> &students, char* Ats) //skaitymo funkcija
 {
-    ifstream fd("testData.txt");
+    ifstream fd("testData.txt"); //duomenu failas
     //atsakymu skaitymas
     for(int i=0; i<20; i++)
     {
@@ -150,19 +150,19 @@ void apdoroti(vector<Student> &students, char* Ats)
 
 //prasideda kitos funkcijos
 
-void sp(vector<Student> students)
+void sp(vector<Student> students) //spausdinimo funkcija
 {
-    ofstream fr("results.txt");
+    ofstream fr("results.txt"); //rezultatu failas
 
     for(int i=0; i<students.size(); i++)
     {
         fr<<students[i].id<<" "<<students[i].score<<" "<<students[i].percent<<"% "<<students[i].grade<<endl;
-    }
+    } //spausdinam viska, id, balus, procentus, pazymius
 
     fr.close();
 }
 
-void stats(vector<Student> students)
+void stats(vector<Student> students) //statistikos isspausdinimas
 {
     cout<<"Studentu skaicius: "<<students.size()<<endl;
     cout<<"Didziausias balas: "<<maximum(students)<<endl;
@@ -177,7 +177,7 @@ void stats(vector<Student> students)
     cout<<endl;
 }
 
-int maximum(vector<Student> students)
+int maximum(vector<Student> students) //didziausio balo ieskojimas
 {
     int m=-41;
     for(int i=0; i<students.size(); i++)
@@ -190,7 +190,7 @@ int maximum(vector<Student> students)
     return m;
 }
 
-int minimum(vector<Student> students)
+int minimum(vector<Student> students) //maziausio balo ieskojimas
 {
     int m=41;
     for(int i=0; i<students.size(); i++)
@@ -203,7 +203,7 @@ int minimum(vector<Student> students)
     return m;
 }
 
-float vidurkSc(vector<Student> students)
+float vidurkSc(vector<Student> students) //vidurkio skaiciavimas (balu)
 {
     float sum=0;
     for(int i=0; i<students.size(); i++)
@@ -213,7 +213,7 @@ float vidurkSc(vector<Student> students)
     return sum/students.size();
 }
 
-float vidurkPr(vector<Student> students)
+float vidurkPr(vector<Student> students) //vidurkio skaiciavimas #2 (procentu)
 {
     float sum=0;
     for(int i=0; i<students.size(); i++)
@@ -223,7 +223,7 @@ float vidurkPr(vector<Student> students)
     return sum/students.size();
 }
 
-int counting(vector<Student> students,int num)
+int counting(vector<Student> students,int num) //pazymiu pasiskirstymo skaiciavimas
 {
     int sum=0;
     for(int i=0; i<students.size(); i++)
@@ -236,18 +236,16 @@ int counting(vector<Student> students,int num)
     return sum;
 }
 
-void statsKl(vector<Student> students,char* Ats)
+void statsKl(vector<Student> students,char* Ats) //klausimu statistika
 {
-    Question qStats[20];
-    int pos[20];
-    int x=0;
+    Question qStats[20]; //klausimu statistikos struktura
     for(int i=0; i<students.size(); i++)
     {
         for(int j=0; j<20; j++)
         {
-            if(students[i].answer[j] == Ats[j]){qStats[j].right++;}
-            else if(students[i].answer[j] == '-'){qStats[j].und++;}
-            else if(students[i].answer[j] != Ats[j]){qStats[j].wrong++;}
+            if(students[i].answer[j] == Ats[j]){qStats[j].right++;}      // lyginame studentu atsakymus,
+            else if(students[i].answer[j] == '-'){qStats[j].und++;}      // skaiciuojam, kiek teisingu, kiek neteisingu,
+            else if(students[i].answer[j] != Ats[j]){qStats[j].wrong++;} // ir kiek neatsakytu atsakymu yra
         }
     }
 
@@ -255,13 +253,17 @@ void statsKl(vector<Student> students,char* Ats)
     {
         cout<<i<<"-o klausimo atsakymai:"<<endl;
         cout<<"Teisingi: "<<qStats[i-1].right<<" | Neteisingi: "<<qStats[i-1].wrong<<" | Neatsakyti: "<<qStats[i-1].und<<endl;
-        cout<<"."<<endl;
+        cout<<"."<<endl; //isspausdiname viska
     }
+
+    int pos[20]; //sunkiausiu klausimu sarasas
+    int x=0; //kiek yra sunkiausiu klausimu
+
     cout<<"Sunkiausi klausimai: "<<endl;
-    sunkKl(qStats,students.size(),pos,x);
+    sunkKl(qStats,students.size(),pos,x); //ieskome sunkiausio klausimo...!
     for(int i=0; i<x; i++)
     {
-        cout<<"  o "<<pos[i]-1<<"-tas klausimas."<<endl;
+        cout<<"  o "<<pos[i]-1<<"-tas klausimas. Procentai: "<<qStats[pos[i]].percent<<endl; //isspausdinam viska
     }
 }
 
@@ -270,8 +272,8 @@ void sunkKl(Question qStats[],int n,int pos[],int &x)
     float sunk=120;
     for(int i=0; i<20; i++)
     {
-        qStats[i].percent = (qStats[i].right/(n*1.0))*100;
-        if(qStats[i].percent<sunk)
+        qStats[i].percent = (qStats[i].right/(n*1.0))*100; //apskaiciuojame teisingu atsakymu procenta
+        if(qStats[i].percent<sunk) //tuo pat surandame, koks sunkiausio klausimo procentas
         {
             sunk=qStats[i].percent;
         }
@@ -279,44 +281,47 @@ void sunkKl(Question qStats[],int n,int pos[],int &x)
 
     for(int i=0; i<20; i++)
     {
-        if(qStats[i].percent == sunk)
-        {
+        if(qStats[i].percent == sunk) //tada lyginame sunkiausio klausimo procenta su kitais procentais;
+        {                             //jei sutampa, idedame to klausimo pozicija i masyva, padidiname x
             pos[x] = i;
             x++;
         }
     }
 }
 
-void paieska(vector<Student> students)
+void paieska(vector<Student> students) //paieskos funkcija
 {
     string sid;
     bool searched;
     cout<<"Studentu ID sarasas:"<<endl;
     for(int i=0; i<students.size(); i++)
     {
-        cout<<"  o "<<students[i].id<<endl;
+        cout<<"  o "<<students[i].id<<endl; //isspausdiname visus ID
     }
     cout<<"===================================="<<endl;
-    while(sid!="0"){
-    searched=false;
+    while(sid!="0"){ //while ciklas vyks, kol sid nera 0
+    searched=false; //searched skirtas tam, kad zinotume, ar buvo sekmingai surastas ID ar ne
     cout<<"Norint iseiti, prasome irasyti 0."<<endl;
     cout<<"Irasykite studento ID: ";
     cin>>sid;
-    if(sid=="0"){break;}
+    if(sid=="0"){break;} //jei ivestas nulis, ciklas nutrauktas
     for(int i=0; i<students.size(); i++)
-    {
-        if(students[i].id == sid)
+    { //ieskome ID!
+        if(students[i].id == sid) //jei yra toks ID: isspausdinam ji, ir isspausdiname studento rezultatus
         {
             cout<<"~~~~~"<<endl;
             cout<<students[i].id<<": "<<endl;
             cout<<"Balai: "<<students[i].score<<" | Procentai: "<<students[i].percent<<" | Pazymys: "<<students[i].grade<<endl;
+            cout<<"Teigiamas pazymys? ";
+            if(students[i].grade>=5){cout<<"Taip."<<endl;}
+            else{cout<<"Ne."<<endl;}
             cout<<"~~~~~"<<endl;
             searched=true;
         }
     }
     if(searched==false)
     {
-        cout<<"Tokio ID nera. Prasome bandyti dar karta."<<endl<<endl;
+        cout<<"Tokio ID nera. Prasome bandyti dar karta."<<endl<<endl; //jei id nesurastas, isspausdiname si pranesima
     }
     }
 }
